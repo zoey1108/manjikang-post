@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3600只股票下跌的这一天，银行股又悄悄创了新高 — 慢基康</title>
+  <style>
+    :root {
+      --bg: #f3f1ec;
+      --paper: #ffffff;
+      --cream: #faf8f5;
+      --ink: #22262a;
+      --muted: #6c737c;
+      --light-muted: #98a0aa;
+      --navy: #1e3a5f;
+      --gold: #c59b4e;
+      --sage: #6f8a7d;
+      --border: #eae6de;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 24px 16px 64px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.85;
+    }
+
+    /* 顶部极简工具栏 */
+    .toolbar {
+      max-width: 677px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e7e2d8;
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid #d9d3c7;
+      background: #fff;
+      color: var(--navy);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn:hover {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+
+    .btn.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+
+    /* 公众号文章主体容器 */
+    .article-shell {
+      max-width: 677px;
+      margin: 0 auto;
+      background: var(--paper);
+      border-radius: 14px;
+      box-shadow: 0 10px 36px rgba(30, 58, 95, 0.06);
+      overflow: hidden;
+      transition: max-width 0.25s ease;
+    }
+
+    .article-shell.mobile-mode {
+      max-width: 390px;
+    }
+
+    .cover-wrap {
+      position: relative;
+      width: 100%;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cover-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .article-body {
+      padding: 32px 36px 44px;
+    }
+
+    .article-shell.mobile-mode .article-body {
+      padding: 22px 20px 36px;
+    }
+
+    h1.title {
+      margin: 0 0 14px;
+      font-size: 24px;
+      line-height: 1.4;
+      font-weight: 700;
+      color: #181c20;
+      letter-spacing: -0.01em;
+    }
+
+    .article-shell.mobile-mode h1.title {
+      font-size: 21px;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--light-muted);
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .meta .author {
+      color: #576b95;
+      font-weight: 500;
+    }
+
+    .content p {
+      margin: 0 0 18px;
+      font-size: 16px;
+      color: #2c3035;
+      text-align: justify;
+    }
+
+    .content strong {
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .section-title {
+      margin: 34px 0 18px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      border-radius: 2px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .quote-box {
+      margin: 22px 0;
+      padding: 16px 20px;
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      color: #3b424a;
+      font-size: 15.5px;
+    }
+
+    .divider {
+      margin: 34px auto;
+      width: 48px;
+      height: 2px;
+      background: var(--border);
+      border: 0;
+    }
+
+    /* 配图卡片 */
+    .figure-card {
+      margin: 26px 0 28px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .figure-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--border);
+      background: #f5f2eb;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .figure-download {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .figure-download:hover {
+      background: rgba(30, 58, 95, 0.08);
+    }
+
+    .figure-svg-wrap {
+      padding: 6px;
+      background: var(--cream);
+    }
+
+    .figure-svg-wrap svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .risk-tip {
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px dashed var(--border);
+      font-size: 13px;
+      color: var(--light-muted);
+      line-height: 1.7;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--navy);
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.16);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <span class="badge">公众号排版预览</span>
+      <span>支持点击每张配图右上角直接导出高清 PNG</span>
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn active" id="btnDesktop" onclick="setMode('desktop')">桌面宽度</button>
+      <button class="btn" id="btnMobile" onclick="setMode('mobile')">手机预览</button>
+      <button class="btn" onclick="copyArticleText()">复制正文</button>
+    </div>
+  </div>
+
+  <article class="article-shell" id="articleShell">
+    <!-- 封面图 -->
+    <div class="cover-wrap">
+      <img src="./cover.jpg" alt="慢基康公众号封面图：静立海浪中的灯塔" />
+    </div>
+
+    <div class="article-body">
+      <h1 class="title">3600只股票下跌的这一天，银行股又悄悄创了新高</h1>
+      <div class="meta">
+        <span class="author">慢基康</span>
+        <span>2026年11月27日</span>
+        <span>上海</span>
+      </div>
+
+      <div class="content" id="articleContent">
+        <p>昨天收盘的时候，我扫了一眼盘面，第一反应是：这市场又开始磨人了。</p>
+        <p>三大指数看着还算体面，沪指微红，深成指盘中一度跌破1万点，尾盘勉强拉了回来。但点开涨跌家数一看，全市场超过3600只股票是绿的，两市成交额缩到了1.32万亿。</p>
+        <p>群里也比前阵子安静了不少。</p>
+        <p>题材轮动得飞快，早上还在追的板块，下午可能就吃面了。前阵子热热闹闹的医药、机器人，这几天回调起来也毫不手软。</p>
+        <p>但就在这么个让人有点提不起劲的震荡日子里，翻开自选一看，好几只银行股居然悄悄创了历史新高——南京银行、成都银行、交通银行、中信银行、江苏银行，齐刷刷走出了新高。</p>
+        <p>还是熟悉的味道。市场情绪一冷，红利资产就站出来撑场面。</p>
+
+        <!-- 配图 1：11月26日盘面反差与银行底气 -->
+        <div class="figure-card">
+          <div class="figure-head">
+            <span>配图 01 · 市场盘面反差与银行三季报数据</span>
+            <button class="figure-download" onclick="downloadSvgAsPng('svgChart1', '01-盘面反差与银行新高.png')">保存高清 PNG</button>
+          </div>
+          <div class="figure-svg-wrap">
+            <svg id="svgChart1" viewBox="0 0 800 440" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, sans-serif">
+              <rect width="800" height="440" rx="12" fill="#FAF8F5"/>
+              <!-- 顶栏标题 -->
+              <rect x="32" y="28" width="5" height="22" rx="2.5" fill="#C59B4E"/>
+              <text x="46" y="45" font-size="20" font-weight="700" fill="#1E3A5F">11月26日盘面切片：市场缩量普跌 vs 银行逆势新高</text>
+              <text x="768" y="44" font-size="12" fill="#8C949E" text-anchor="end">数据来源：公开盘面及2026三季报</text>
+
+              <!-- 左侧卡片：全市场温度 -->
+              <rect x="32" y="72" width="356" height="332" rx="12" fill="#FFFFFF" stroke="#EAE6DE" stroke-width="1.2"/>
+              <text x="56" y="106" font-size="15" font-weight="700" fill="#2C3035">全市场情绪温度</text>
+              <text x="364" y="106" font-size="12" fill="#8C949E" text-anchor="end">两市成交 1.32 万亿</text>
+
+              <!-- 涨跌比例条 -->
+              <text x="56" y="144" font-size="13" fill="#6C737C">涨跌个股分布</text>
+              <rect x="56" y="156" width="308" height="24" rx="6" fill="#E8EFEA"/>
+              <rect x="56" y="156" width="207" height="24" rx="6" fill="#2F7D5B"/>
+              <rect x="267" y="156" width="97" height="24" rx="6" fill="#C84B4B"/>
+              <text x="68" y="172" font-size="12" font-weight="600" fill="#FFFFFF">下跌 3,642 只 (67%)</text>
+              <text x="354" y="172" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="end">上涨 1,766 只</text>
+
+              <!-- 指标网格 -->
+              <rect x="56" y="202" width="146" height="76" rx="8" fill="#FAF8F5"/>
+              <text x="72" y="228" font-size="12" fill="#6C737C">上证指数</text>
+              <text x="72" y="258" font-size="20" font-weight="700" fill="#C84B4B">+0.01%</text>
+
+              <rect x="218" y="202" width="146" height="76" rx="8" fill="#FAF8F5"/>
+              <text x="234" y="228" font-size="12" fill="#6C737C">深证成指</text>
+              <text x="234" y="258" font-size="20" font-weight="700" fill="#2F7D5B">-0.02%</text>
+              <text x="234" y="272" font-size="11" fill="#8C949E">盘中一度破万点</text>
+
+              <!-- 市场体感标注 -->
+              <rect x="56" y="296" width="308" height="84" rx="8" fill="#F4F6F8"/>
+              <text x="72" y="322" font-size="13" font-weight="700" fill="#1E3A5F">盘面体感</text>
+              <text x="72" y="345" font-size="12.5" fill="#525A63">• 存量博弈特征明显，较前日缩量 657 亿</text>
+              <text x="72" y="366" font-size="12.5" fill="#525A63">• 医药、机器人等前期热门题材回调明显</text>
+
+              <!-- 右侧卡片：银行股新高 -->
+              <rect x="412" y="72" width="356" height="332" rx="12" fill="#1E3A5F"/>
+              <text x="436" y="106" font-size="15" font-weight="700" fill="#FFFFFF">另一边：银行板块逆势走强</text>
+              <rect x="652" y="88" width="92" height="24" rx="12" fill="rgba(197,155,78,0.22)"/>
+              <text x="698" y="104" font-size="11.5" font-weight="600" fill="#E8C680" text-anchor="middle">多股历史新高</text>
+
+              <!-- 新高标签 -->
+              <g font-size="12.5" font-weight="600">
+                <rect x="436" y="128" width="96" height="32" rx="6" fill="rgba(255,255,255,0.12)"/>
+                <text x="484" y="149" fill="#FFFFFF" text-anchor="middle">南京银行</text>
+
+                <rect x="542" y="128" width="96" height="32" rx="6" fill="rgba(255,255,255,0.12)"/>
+                <text x="590" y="149" fill="#FFFFFF" text-anchor="middle">成都银行</text>
+
+                <rect x="648" y="128" width="96" height="32" rx="6" fill="rgba(255,255,255,0.12)"/>
+                <text x="696" y="149" fill="#FFFFFF" text-anchor="middle">交通银行</text>
+
+                <rect x="436" y="168" width="96" height="32" rx="6" fill="rgba(255,255,255,0.12)"/>
+                <text x="484" y="189" fill="#FFFFFF" text-anchor="middle">中信银行</text>
+
+                <rect x="542" y="168" width="96" height="32" rx="6" fill="rgba(255,255,255,0.12)"/>
+                <text x="590" y="189" fill="#FFFFFF" text-anchor="middle">江苏银行</text>
+              </g>
+
+              <!-- 基本面底气 -->
+              <line x1="436" y1="222" x2="744" y2="222" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+              <text x="436" y="250" font-size="13" fill="#B8C7D9">42家上市银行 2026 前三季度业绩底气</text>
+
+              <rect x="436" y="266" width="146" height="114" rx="8" fill="rgba(255,255,255,0.08)"/>
+              <text x="452" y="294" font-size="12" fill="#B8C7D9">合计营收</text>
+              <text x="452" y="326" font-size="22" font-weight="700" fill="#FFFFFF">4.66 万亿</text>
+              <text x="452" y="354" font-size="13" font-weight="600" fill="#E8C680">同比 +7.8% ▲</text>
+
+              <rect x="598" y="266" width="146" height="114" rx="8" fill="rgba(255,255,255,0.08)"/>
+              <text x="614" y="294" font-size="12" fill="#B8C7D9">归母净利润</text>
+              <text x="614" y="326" font-size="22" font-weight="700" fill="#FFFFFF">1.75 万亿</text>
+              <text x="614" y="354" font-size="13" font-weight="600" fill="#E8C680">同比 +3.8% ▲</text>
+            </svg>
+          </div>
+        </div>
+
+        <h2 class="section-title">一、为什么一到缩量震荡，资金就往回缩？</h2>
+
+        <p>其实逻辑说穿了并不复杂。</p>
+        <p>过去一段时间，市场成交量放得很大，大家都在找高弹性、找景气度、找能讲大故事的赛道。那种环境下，你跟别人聊银行、聊红利、聊分红，大概率会被嫌弃“太慢了”“没格局”。</p>
+        <p>但一旦成交量缩下来，进入存量博弈，很多纯靠情绪推上去的题材就接不住了。资金是很现实的，赚不到快钱的时候，第一反应就是找确定性，找能拿得住、不用天天盯盘的地方躲一躲。</p>
+        <p>银行板块这波走强，也不完全是情绪避险。</p>
+        <p>刚过去不久的2026年三季报其实给了不少底气。42家上市银行前三季度合计营收4.66万亿，同比增长7.8%，归母净利润1.75万亿，同比增长3.8%，增速比上半年还要再往上抬了一点。</p>
+
+        <div class="quote-box">
+          翻译成大白话就是：大家之前最担心的息差收窄、业绩失速，至少从最新财报来看，比预想中要稳得多。
+        </div>
+
+        <p>再加上马上就到12月了，临近年底，像险资这类“耐心资本”又有跨年配置的需求。无风险利率摆在这里，既要稳健、又要有点像样的股息回报，算来算去，高股息资产还是绕不开的选择。</p>
+
+        <h2 class="section-title">二、除了银行，昨天还有个信号也挺有意思</h2>
+
+        <p>昨天板块涨幅榜排第一的，其实是贵金属，整个板块涨了4%多。</p>
+        <p>我顺手刷到一条消息，达利欧又出来聊黄金了。老爷子还是那个观点，建议不管市场好坏，组合里都可以留10%到15%的仓位给黄金，用来对冲债务周期和地缘波动。</p>
+        <p>之前写多元配置的时候我就提过，达利欧虽然退休了，但他的很多底层逻辑，放在今天的国内投资环境里依然管用。</p>
+        <p>你看昨天这一天的盘面，其实就是一个很典型的“多资产教科书”：科技和题材股剧烈分化、让人坐过山车的时候，银行和黄金稳稳托住了底。</p>
+        <p>很多朋友在市场跌的时候总爱问，是不是应该清仓避险？但实际上，绝大多数人根本抓不准什么时候该走、什么时候该回。真要靠择时去躲过每一次回调，大概率是跌的时候硬扛，涨的时候踏空。</p>
+        <p>比起费劲猜明天大盘涨还是跌，把仓位拆开，配一点跟主流热点不同步的资产——比如红利底仓、比如黄金、比如纯债——反而是普通人更容易坚持下来的解法。</p>
+        <p><strong>说白了，鸡蛋不仅要放在不同的篮子里，篮子还得放在不同的架子上。</strong></p>
+
+        <!-- 配图 2：多资产“不同架子”减震器模型 -->
+        <div class="figure-card">
+          <div class="figure-head">
+            <span>配图 02 · 普通人的多资产“三个架子”配置示意</span>
+            <button class="figure-download" onclick="downloadSvgAsPng('svgChart2', '02-多资产三个架子配置示意.png')">保存高清 PNG</button>
+          </div>
+          <div class="figure-svg-wrap">
+            <svg id="svgChart2" viewBox="0 0 800 390" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, sans-serif">
+              <rect width="800" height="390" rx="12" fill="#FAF8F5"/>
+              <rect x="32" y="28" width="5" height="22" rx="2.5" fill="#C59B4E"/>
+              <text x="46" y="45" font-size="20" font-weight="700" fill="#1E3A5F">鸡蛋放不同篮子，篮子还要放不同架子</text>
+              <text x="768" y="44" font-size="12" fill="#8C949E" text-anchor="end">慢基康 · 震荡市底仓配置思路</text>
+
+              <!-- 支架 1：进攻架 -->
+              <rect x="32" y="76" width="232" height="252" rx="12" fill="#FFFFFF" stroke="#EAE6DE" stroke-width="1.2"/>
+              <rect x="32" y="76" width="232" height="8" rx="4" fill="#6F8A7D"/>
+              <text x="52" y="114" font-size="12" font-weight="600" fill="#6F8A7D">架子 01 · 卫星进攻</text>
+              <text x="52" y="142" font-size="18" font-weight="700" fill="#1E3A5F">成长 / 宽基 / 量化</text>
+              <line x1="52" y1="158" x2="244" y2="158" stroke="#EAE6DE" stroke-width="1"/>
+              <text x="52" y="186" font-size="13" fill="#4B525A">• 角色：顺风局赚超额弹性</text>
+              <text x="52" y="212" font-size="13" fill="#4B525A">• 特征：波动大、轮动快</text>
+              <text x="52" y="238" font-size="13" fill="#4B525A">• 忌讳：满仓单押热门题材</text>
+              <rect x="52" y="266" width="192" height="40" rx="8" fill="#F2F6F4"/>
+              <text x="148" y="291" font-size="12.5" font-weight="600" fill="#4E6B5D" text-anchor="middle">负责向上拉收益</text>
+
+              <!-- 支架 2：核心底仓架 -->
+              <rect x="284" y="76" width="232" height="252" rx="12" fill="#1E3A5F"/>
+              <rect x="284" y="76" width="232" height="8" rx="4" fill="#C59B4E"/>
+              <text x="304" y="114" font-size="12" font-weight="600" fill="#E8C680">架子 02 · 核心压舱石</text>
+              <text x="304" y="142" font-size="18" font-weight="700" fill="#FFFFFF">红利低波 + 纯债</text>
+              <line x1="304" y1="158" x2="496" y2="158" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+              <text x="304" y="186" font-size="13" fill="#DCE4EE">• 角色：震荡市稳住净值心态</text>
+              <text x="304" y="212" font-size="13" fill="#DCE4EE">• 特征：低波动、稳定现金流</text>
+              <text x="304" y="238" font-size="13" fill="#DCE4EE">• 逻辑：低利率+险资耐心资本</text>
+              <rect x="304" y="266" width="192" height="40" rx="8" fill="rgba(197,155,78,0.22)"/>
+              <text x="400" y="291" font-size="12.5" font-weight="600" fill="#F2D492" text-anchor="middle">负责托底与拿得住</text>
+
+              <!-- 支架 3：对冲架 -->
+              <rect x="536" y="76" width="232" height="252" rx="12" fill="#FFFFFF" stroke="#EAE6DE" stroke-width="1.2"/>
+              <rect x="536" y="76" width="232" height="8" rx="4" fill="#C59B4E"/>
+              <text x="556" y="114" font-size="12" font-weight="600" fill="#B58939">架子 03 · 风险对冲</text>
+              <text x="556" y="142" font-size="18" font-weight="700" fill="#1E3A5F">黄金 (10%~15%)</text>
+              <line x1="556" y1="158" x2="748" y2="158" stroke="#EAE6DE" stroke-width="1"/>
+              <text x="556" y="186" font-size="13" fill="#4B525A">• 角色：对冲债务与地缘波动</text>
+              <text x="556" y="212" font-size="13" fill="#4B525A">• 特征：与A股相关性极低</text>
+              <text x="556" y="238" font-size="13" fill="#4B525A">• 参考：达利欧长期配置建议</text>
+              <rect x="556" y="266" width="192" height="40" rx="8" fill="#FAF4E8"/>
+              <text x="652" y="291" font-size="12.5" font-weight="600" fill="#9A722B" text-anchor="middle">负责对冲极端不确定性</text>
+
+              <!-- 底部总结 -->
+              <text x="400" y="362" font-size="13" fill="#6C737C" text-anchor="middle">不赌明天涨跌，而是靠低相关性资产组合，穿越牛熊周期</text>
+            </svg>
+          </div>
+        </div>
+
+        <h2 class="section-title">三、不过，现在适合去追高吗？</h2>
+
+        <p>聊到银行和红利创新高，肯定又有朋友要问：现在还能买吗？</p>
+        <p>在动手之前，有几件事我觉得还是得先想清楚。</p>
+        <p><strong>第一，新高位置，千万别带着“赚快钱”的心态去追。</strong></p>
+        <p>红利和银行从来不是用来暴富的资产。历史上看，它最舒服的买点，往往是在大家都不看好、觉得它“涨得太慢”的时候慢慢攒筹码；等它连续新高、人人都开始夸它稳健的时候，短期波动反而容易放大。</p>
+        <p><strong>第二，风格轮动是A股的常态。</strong></p>
+        <p>假如后面市场成交量重新放大，科技成长股再度接管舞台，银行和红利大概率会跑输大盘，甚至逆势回调。如果到时候你看着别人吃肉自己挨打、拿不住割在半山腰，那这笔配置就失去了意义。</p>
+        <p><strong>第三，相比赌单只银行股，普通人用红利类指数工具会更省心。</strong></p>
+        <p>个股总有各自的经营周期和突发风险，而像红利低波、中证红利或者央企红利这类指数，本身自带分散和定期调仓机制，当成组合里的“压舱石”来用，容错率会高不少。</p>
+
+        <!-- 配图 3：动手前的 3 条避坑清单 -->
+        <div class="figure-card">
+          <div class="figure-head">
+            <span>配图 03 · 关注红利/银行底仓前的 3 点提醒</span>
+            <button class="figure-download" onclick="downloadSvgAsPng('svgChart3', '03-红利配置避坑清单.png')">保存高清 PNG</button>
+          </div>
+          <div class="figure-svg-wrap">
+            <svg id="svgChart3" viewBox="0 0 800 310" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, PingFang SC, Microsoft YaHei, sans-serif">
+              <rect width="800" height="310" rx="12" fill="#FAF8F5"/>
+              <rect x="32" y="26" width="5" height="22" rx="2.5" fill="#C59B4E"/>
+              <text x="46" y="43" font-size="20" font-weight="700" fill="#1E3A5F">动手之前，先想清楚这 3 件事</text>
+
+              <!-- 条目 1 -->
+              <rect x="32" y="68" width="736" height="64" rx="10" fill="#FFFFFF" stroke="#EAE6DE" stroke-width="1.2"/>
+              <circle cx="68" cy="100" r="16" fill="#1E3A5F"/>
+              <text x="68" y="105" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">01</text>
+              <text x="100" y="96" font-size="15" font-weight="700" fill="#1E3A5F">别在新高位置带着“赚快钱”的心态一把梭</text>
+              <text x="100" y="117" font-size="12.5" fill="#6C737C">红利适合冷清时分批攒筹码，人声鼎沸时容易遇到短期波动</text>
+
+              <!-- 条目 2 -->
+              <rect x="32" y="144" width="736" height="64" rx="10" fill="#FFFFFF" stroke="#EAE6DE" stroke-width="1.2"/>
+              <circle cx="68" cy="176" r="16" fill="#C59B4E"/>
+              <text x="68" y="181" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">02</text>
+              <text x="100" y="172" font-size="15" font-weight="700" fill="#1E3A5F">提前做好心理建设：成长风起时，它大概率会跑输</text>
+              <text x="100" y="193" font-size="12.5" fill="#6C737C">知道自己赚什么钱，才不会看别人吃肉就眼红、割在半山腰</text>
+
+              <!-- 条目 3 -->
+              <rect x="32" y="220" width="736" height="64" rx="10" fill="#FFFFFF" stroke="#EAE6DE" stroke-width="1.2"/>
+              <circle cx="68" cy="252" r="16" fill="#6F8A7D"/>
+              <text x="68" y="257" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">03</text>
+              <text x="100" y="248" font-size="15" font-weight="700" fill="#1E3A5F">用红利指数工具替代单押个股，容错率更高</text>
+              <text x="100" y="269" font-size="12.5" fill="#6C737C">红利低波 / 中证红利 / 央企红利自带分散与定期调仓机制</text>
+            </svg>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <p>一转眼，2026年只剩最后一个月了。</p>
+        <p>经历过这两年的起起伏伏，我越来越觉得，投资这件事，最后拼的往往不是谁在顺风局里冲得最猛，而是谁在逆风局和震荡市里能活得更舒服、拿得更久。</p>
+        <p>如果你的组合里已经有足够的红利、债基或黄金底仓，那昨天这种3600只个股下跌的行情，心态大概率不会太崩；如果还没有，倒也不用急着今天明天就一把梭，趁着年底复盘，慢慢把自己的资产配置框架搭起来，比盯着盘面焦虑有用得多。</p>
+        <p><strong>暴富没戏，但赚个安稳钱，还是可以期待一下的。</strong></p>
+
+        <div class="risk-tip">
+          风险提示：本文仅为个人市场观察与投资记录，不构成任何投资建议。市场有风险，投资需谨慎。
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <div class="toast" id="toast">已复制</div>
+
+  <script>
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    function setMode(mode) {
+      const shell = document.getElementById('articleShell');
+      const btnD = document.getElementById('btnDesktop');
+      const btnM = document.getElementById('btnMobile');
+      if (mode === 'mobile') {
+        shell.classList.add('mobile-mode');
+        btnM.classList.add('active');
+        btnD.classList.remove('active');
+      } else {
+        shell.classList.remove('mobile-mode');
+        btnD.classList.add('active');
+        btnM.classList.remove('active');
+      }
+    }
+
+    function copyArticleText() {
+      const title = document.querySelector('h1.title').innerText;
+      const nodes = document.querySelectorAll('#articleContent p, #articleContent h2, #articleContent .quote-box, #articleContent .risk-tip');
+      const text = [title, '', ...Array.from(nodes).map(n => n.innerText.trim())].join('\n\n');
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('公众号正文已复制到剪贴板');
+      });
+    }
+
+    function downloadSvgAsPng(svgId, filename) {
+      const svg = document.getElementById(svgId);
+      const vb = svg.getAttribute('viewBox').split(' ').map(Number);
+      const width = vb[2];
+      const height = vb[3];
+      const scale = 2; // 2x 高清导出
+
+      const cloned = svg.cloneNode(true);
+      cloned.setAttribute('width', width);
+      cloned.setAttribute('height', height);
+
+      const xml = new XMLSerializer().serializeToString(cloned);
+      const blob = new Blob([xml], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+
+      const img = new Image();
+      img.onload = function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = width * scale;
+        canvas.height = height * scale;
+        const ctx = canvas.getContext('2d');
+        ctx.scale(scale, scale);
+        ctx.drawImage(img, 0, 0, width, height);
+        URL.revokeObjectURL(url);
+
+        const a = document.createElement('a');
+        a.download = filename;
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+        showToast('已导出高清配图：' + filename);
+      };
+      img.src = url;
+    }
+  </script>
+</body>
+</html>
